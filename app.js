@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
+const config = require("./config");
+
 app.use(express.json());
 
- app.post('/api/todos',function(req, res){
+ app.post(config.uri,function(req, res){
      let body = req.body;
     res.json(body);
     console.log(body);
@@ -10,7 +12,7 @@ app.use(express.json());
     // save task to BD  
 });
 
-app.get("/api/todos", function(req, res){
+app.get(config.uri, function(req, res){
     // Get from BD todos
     let todos = {
         "id":1,
@@ -21,12 +23,13 @@ app.get("/api/todos", function(req, res){
     res.json(todos);   
 });
 
-app.put('/api/todos/:id', function(req, res){
+app.put(config.uri+'/:id', function(req, res){
     let id = req.params.id;
+    res.send(id);
     console.log(id);
     // 
 });
-const port = 8080;
+const port = config.port;
 
 app.listen(port, function(){   
     console.log(`Server started on port: ${port}`);
