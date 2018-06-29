@@ -1,6 +1,8 @@
-const express = require('express');
+
+ const express = require('express');
 const app = express();
 const config = require("./config/config");
+const showAllTodo = require("./showAll");
 
 app.use(express.json());
 
@@ -14,13 +16,14 @@ app.use(express.json());
 
 app.get(config.uri, function(req, res){
     // Get from BD todos
-    let todos = {
-        "id":1,
-        "status":"done",
-        "name":"sumthing" 
-    };
-    console.log(todos);
-    res.json(todos);   
+    // let todos = {
+    //     "id":1,
+    //     "status":"done",
+    //     "name":"sumthing" 
+    // };
+    console.log(showAllTodo);
+    console.log("hi from get");
+    res.send("hi from get");   
 });
 
 app.put(config.uri+'/:id', function(req, res){
@@ -34,4 +37,3 @@ const port = config.port;
 app.listen(port, function(){   
     console.log(`Server started on port: ${port}`);
 });
- 
