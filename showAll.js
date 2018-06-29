@@ -1,19 +1,19 @@
 var mongoose = require('mongoose');
 const Todo = require('./libs/model');
 
-mongoose.connect('mongodb://localhost/tododb');
 
- //let todo = new Todo({ name: 'Aaaaaa2', status: 'done' });
-// todo.save().then(() => console.log('save'+ todo));
+module.exports ={show:function(){
 
+   
+    mongoose.connect('mongodb://localhost/tododb');
 
-
-const showAllTodo =Todo.find({}, function(err, todos)
-{       mongoose.disconnect();
-	if(err) return console.log(err);
-       console.log(todos);
-       
+    Todo.find({}, function(err, todos){
+       mongoose.disconnect();
+    	if(err) return console.log(err);
+       console.log(todos[0]); 
+            
 });
+    
+}};
 
-module.exports =showAllTodo;
 

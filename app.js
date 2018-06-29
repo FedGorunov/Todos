@@ -21,7 +21,7 @@ app.get(config.uri, function(req, res){
     //     "status":"done",
     //     "name":"sumthing" 
     // };
-    console.log(showAllTodo);
+    showAllTodo.show();
     console.log("hi from get");
     res.send("hi from get");   
 });
