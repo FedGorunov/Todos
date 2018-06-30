@@ -32,9 +32,14 @@ app.get(config.uri, function(req, res){
 
 app.put(config.uri+'/:id', function(req, res){
     let id = req.params.id;
-    res.send(id);
+Todo.findByIdAndUpdate(id, {name: req.body.name, status: req.body.status}, function(err, todo){  
+    //mongoose.disconnect();
+    if(err) return console.log(err);
+    res.send( todo);
+});  
     console.log(id);
 });
+
 const port = config.port;
 
 app.listen(port, function(){   
