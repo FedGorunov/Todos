@@ -1,36 +1,39 @@
 
- const express = require('express');
+const express = require('express');
 const app = express();
 const config = require("./config/config");
-const showAllTodo = require("./showAll");
+const Todo = require('./libs/model');
 
 app.use(express.json());
 
  app.post(config.uri,function(req, res){
-     let body = req.body;
-    res.json(body);
-    console.log(body);
-    //create new task {id:id, status:body.status, name:body.name}
-    // save task to BD  
+    //create new task 
+     let newTask = new Todo({name:req.body.name,
+                            status:req.body.status});
+    // save task to BD
+    Todo.create(newTask, function(err, todos){
+       // mongoose.disconnect();
+         if(err) return console.log(err);
+        res.json(newTask);   
+     });
+    
+    console.log("Save new task in BD"+newTask); 
 });
-
+    
 app.get(config.uri, function(req, res){
-    // Get from BD todos
-    // let todos = {
-    //     "id":1,
-    //     "status":"done",
-    //     "name":"sumthing" 
-    // };
-    showAllTodo.show();
-    console.log("hi from get");
-    res.send("hi from get");   
+    // Get from BD todos 
+    Todo.find({}, function(err, todos){
+       // mongoose.disconnect();
+         if(err) return console.log(err);
+        res.json(todos);   
+     });
+    console.log("hi from get");  
 });
 
 app.put(config.uri+'/:id', function(req, res){
     let id = req.params.id;
     res.send(id);
     console.log(id);
-    // 
 });
 const port = config.port;
 

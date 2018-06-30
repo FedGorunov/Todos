@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-
+mongoose.connect('mongodb://localhost/tododb');
 
 mongoose.Promise = global.Promise;
 
