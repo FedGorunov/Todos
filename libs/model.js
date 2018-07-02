@@ -5,8 +5,13 @@ mongoose.Promise = global.Promise;
 
 Schema = mongoose.Schema;
 const schema = new Schema({
-        name: String,      
-        status:String
+        name:{
+           type: String
+         },      
+        status:{
+            type: String,
+            enum: ['new', 'started', 'done']
+         }
         });
    
 const Todo = mongoose.model('Todo', schema);
