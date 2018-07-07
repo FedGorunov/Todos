@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Список дел</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+</head>
+<body>
+    <h2>Список дел</h2>
+    <form name="todoForm">
+        <input type="hidden" name="id" value="0" />
+        <div class="form-group">
+            <label for="name">Название задачи:</label>
+            <input class="form-control" name="name" />
+        </div>
+        <div class="form-group">
+            <label for="status">Статус выполнения:</label>
+            <input class="form-control" name="status" />
+        </div>
+        <div class="panel-body">
+            <button type="submit" class="btn btn-sm btn-primary">Сохранить</button>
+            <a id="reset" class="btn btn-sm btn-primary">Сбросить</a>
+        </div>
+    </form>
+    <table class="table table-condensed table-striped table-bordered">
+        <thead><tr><th>Id</th><th>Наименование задачи</th><th>Статус выполнения</th><th></th></tr></thead>
+        <tbody>
+        </tbody>
+    </table>
+  
+    <script src="script.js"></script>
+</body>
+</html>

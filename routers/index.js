@@ -29,15 +29,24 @@ module.exports = function(app) {
     });
   });
 
+  app.get(config.uri + "/:id", function(req, res){
+    let id = req.params.id;
+    Todo.findById(id, function(err, todo) {
+        if (err) return res.status(500).send({ error: "Something failed!" });
+        res.json(todo);
+        console.log("hi from get one");
+      });
+    
+});
+
   app.put(config.uri + "/:id", function(req, res) {
     if (!req.body) return res.sendStatus(400);
     let id = req.params.id;
-    let newTask = new Todo({
+    let newValues = {
       name: req.body.name,
       status: req.body.status
-    });
-    console.log("New task: " + newTask);
-    Todo.findByIdAndUpdate(id, newTask, { new: true }, function(err, todo) {
+    };
+    Todo.findByIdAndUpdate(id,newValues , { new: true, runValidators: true }, function(err, todo) {
       if (err) return res.status(500).send({ error: "Something failed!" });
       res.send(todo);
       console.log(id + "  replaced");
