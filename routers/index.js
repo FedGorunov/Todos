@@ -52,4 +52,14 @@ module.exports = function(app) {
       console.log(id + "  replaced");
     });
   });
+
+ 
+app.delete(config.uri + "/:id", function(req, res) { 
+  let id = req.params.id; 
+  Todo.findByIdAndRemove(id, function(err, todo){
+    if (err) return res.status(500).send({ error: "Something failed!" });
+      res.send(todo);
+      console.log(todo + " delete!")
+  });
+});
 };

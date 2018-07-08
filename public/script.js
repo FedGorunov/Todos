@@ -46,8 +46,6 @@ function CreateTodo(todoName, todoStatus) {
 }
 // Изменение задачи
 function EditTodo(todoId, todoName, todoStatus) {
-  //debugger;
-  console.log('ldldld')
   $.ajax({
     url: "api/todos/" + todoId,
     contentType: "application/json",
@@ -60,6 +58,18 @@ function EditTodo(todoId, todoName, todoStatus) {
     success: function(todo) {
       reset();
       $("tr[data-rowid='" + todo._id + "']").replaceWith(row(todo));
+    }
+  });
+}
+
+function DeleteTodo(todoId){
+  $.ajax({
+    url: "api/todos/" + todoId,
+    contentType: "application/json",
+    method: "DELETE",
+    success: function(todo) {
+      console.log(todo)
+      $("tr[data-rowid='" + todo._id + "']").remove();
     }
   });
 }
@@ -113,6 +123,11 @@ $("form").submit(function(e) {
   $("body").on("click", ".editLink", function () {
     var id = $(this).data("id");
     GetTodo(id);
+})
+// ссылка удалить
+$("body").on("click", ".removeLink", function () {
+  var id = $(this).data("id");
+  DeleteTodo(id);
 })
 // загрузка списка всех задач
 GetTodos();
