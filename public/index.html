@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -8,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 </head>
+
 <body>
     <h2>Список дел</h2>
     <form name="todoForm">
@@ -18,7 +20,11 @@
         </div>
         <div class="form-group">
             <label for="status">Статус выполнения:</label>
-            <input class="form-control" name="status" />
+            <select class="form-control" name="status">
+                <option value="new">new</option>
+                <option value="started">started</option>
+                <option value="done">done</option>
+            </select>
         </div>
         <div class="panel-body">
             <button type="submit" class="btn btn-sm btn-primary">Сохранить</button>
@@ -26,11 +32,19 @@
         </div>
     </form>
     <table class="table table-condensed table-striped table-bordered">
-        <thead><tr><th>Id</th><th>Наименование задачи</th><th>Статус выполнения</th><th></th></tr></thead>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Наименование задачи</th>
+                <th>Статус выполнения</th>
+                <th></th>
+            </tr>
+        </thead>
         <tbody>
         </tbody>
     </table>
-  
+
     <script src="script.js"></script>
 </body>
+
 </html>
