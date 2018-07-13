@@ -1,34 +1,23 @@
+
 const express = require('express');
 const app = express();
+const config = require("./config/config");
+const port = config.port;
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
- app.post('/api/todos',function(req, res){
-     let body = req.body;
-    res.json(body);
-    console.log(body);
-    //create new task {id:id, status:body.status, name:body.name}
-    // save task to BD  
-});
+app.use(express.static(__dirname + "/public"));
 
-app.get("/api/todos", function(req, res){
-    // Get from BD todos
-    let todos = {
-        "id":1,
-        "status":"done",
-        "name":"sumthing" 
-    };
-    console.log(todos);
-    res.json(todos);   
-});
+require('./routers')(app);
 
-app.put('/api/todos/:id', function(req, res){
-    let id = req.params.id;
-    console.log(id);
-    // 
-});
-const port = 8080;
+app.use(function(err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).json({err:'Something broke!'});
+  });
 
 app.listen(port, function(){   
     console.log(`Server started on port: ${port}`);
 });
- 
